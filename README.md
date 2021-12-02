@@ -1,2 +1,4 @@
-# advent-of-code-2021
-Happy Holidays
+# Advent of Code 2021
+Happy Holidays!
+
+Challenges found [here](https://adventofcode.com/2021)!
