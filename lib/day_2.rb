@@ -1,22 +1,19 @@
 class Day2
   def self.run(input)
     instructions = parse(input)
-    totals = {horizontal: 0, depth: 0}
 
-    instructions.each do |movement|
+    instructions.each_with_object({horizontal: 0, depth: 0}) do |movement, memo|
       command = movement.keys.first
 
       case command
       when "forward"
-        totals[:horizontal] += movement[command]
+        memo[:horizontal] += movement[command]
       when "up"
-        totals[:depth] -= movement[command]
+        memo[:depth] -= movement[command]
       when "down"
-        totals[:depth] += movement[command]
+        memo[:depth] += movement[command]
       end
     end
-
-    totals
   end
 
   class << self
