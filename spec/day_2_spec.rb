@@ -1,18 +1,9 @@
 require "./lib/day_2"
 
 describe Day2 do
-  context "output structure" do
-    it "returns a hash with known keys" do
-      actual_output = Day2.run(puzzle_input)
-
-      expect(actual_output).to be_a(Hash)
-      expect(actual_output.keys).to match([:horizontal, :depth])
-    end
-  end
-
   context "horizontal movement" do
     context "forward" do
-      it "adds to the horizontal position of the submarine" do
+      xit "adds to the horizontal position of the submarine" do
         actual_output = Day2.run(["forward 1"])
 
         expect(actual_output).to match({horizontal: 1, depth: 0})
@@ -22,7 +13,7 @@ describe Day2 do
 
   context "vertical movement" do
     context "up" do
-      it "decreases submarine depth" do
+      xit "decreases submarine depth" do
         actual_output = Day2.run(["up 1"])
 
         expect(actual_output).to match({horizontal: 0, depth: -1})
@@ -30,7 +21,7 @@ describe Day2 do
     end
 
     context "down" do
-      it "increases submarine depth" do
+      xit "increases submarine depth" do
         actual_output = Day2.run(["down 1"])
 
         expect(actual_output).to match({horizontal: 0, depth: 1})
@@ -38,17 +29,27 @@ describe Day2 do
     end
   end
 
-  context "puzzle input" do
-    it "produces correct output" do
-      input = puzzle_input
+  context "sample input" do
+    it "answers correctly" do
+      actual_output = Day2.new.part_1(sample_input_path)
 
-      actual_output = Day2.run(input)
-
-      expect(actual_output).to match({horizontal: 15, depth: 10})
-      expect(actual_output[:horizontal] * actual_output[:depth]).to eq(150)
+      expect(actual_output).to eq(150)
     end
   end
-  def puzzle_input
-    @input ||= File.readlines("./spec/support/fixtures/day_2.txt", chomp: true)
+
+  context "puzzle input" do
+    it "works" do
+      actual_output = Day2.new.part_1(puzzle_input_path)
+
+      expect(actual_output).to eq(1459206)
+    end
+  end
+
+  def sample_input_path
+    "./spec/support/fixtures/day_2_sample.txt"
+  end
+
+  def puzzle_input_path
+    "./spec/support/fixtures/day_2.txt"
   end
 end
