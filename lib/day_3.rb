@@ -2,10 +2,36 @@ class Day3
   attr_accessor :binaries
   attr_reader :epsilon_rate, :gamma_rate
 
-  def initialize(binaries)
-    @binaries = binaries
-    @epsilon_rate = [0, 0, 0, 0, 0]
-    @gamma_rate = [0, 0, 0, 0, 0]
+  def initialize(filepath)
+    @binaries = read_input(filepath)
+    @binary_length = @binaries.first.length
+    @epsilon_rate = Array.new(@binary_length, 0)
+    @gamma_rate = Array.new(@binary_length, 0)
+  end
+
+  def part1
+    calculate_rates
+
+    multiply_rates
+  end
+
+  private
+
+  def add_binaries
+    sum = Array.new(@binary_length, 0)
+    @binaries.each do |binary|
+      split = binary.chars.map(&:to_i)
+
+      split.each_with_index do |value, i|
+        sum[i] += value
+      end
+    end
+
+    sum
+  end
+
+  def binary_to_decimal(binary_string)
+    binary_string.to_i(2)
   end
 
   def calculate_rates
@@ -18,20 +44,12 @@ class Day3
     end
   end
 
-  def add_binaries
-    sum = [0, 0, 0, 0, 0]
-    @binaries.each do |binary|
-      split = binary.chars.map(&:to_i)
+  def multiply_rates
+    gamma_decimal = binary_to_decimal(@gamma_rate.join)
+    epsilon_decimal = binary_to_decimal(@epsilon_rate.join)
 
-      split.each_with_index do |value, i|
-        sum[i] += value
-      end
-    end
-
-    sum
+    gamma_decimal * epsilon_decimal
   end
-
-  private
 
   def read_input(filepath)
     File.readlines(filepath, chomp: true)
