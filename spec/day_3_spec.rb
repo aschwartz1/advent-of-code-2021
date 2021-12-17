@@ -24,12 +24,15 @@ describe Day3 do
       it "works" do
         runner = Day3.new(sample_input_path)
 
-        expect(runner.part2).to eq("10111")
+        expect(runner.part2).to eq(230)
       end
     end
 
     context "puzzle input" do
       it "works" do
+        runner = Day3.new(puzzle_input_path)
+
+        expect(runner.part2).to eq(2845944)
       end
     end
   end

@@ -12,7 +12,7 @@ class Day3
   def part1
     calculate_rates
 
-    multiply_rates
+    multiply_rates(@gamma_rate, @epsilon_rate)
   end
 
   def part2
@@ -21,8 +21,7 @@ class Day3
     oxygen_generator_binary = calculate_oxygen_generator(binaries_array)
     co2_scrubber_binary = calculate_co2_scrubber(binaries_array)
 
-    # TODO: turn them into ints, multiply together & return
-    #   - will need to generalize the multiply_rates method so I can reuse it
+    multiply_rates(oxygen_generator_binary, co2_scrubber_binary)
   end
 
   private
@@ -54,11 +53,11 @@ class Day3
     end
   end
 
-  def multiply_rates
-    gamma_decimal = binary_to_decimal(@gamma_rate.join)
-    epsilon_decimal = binary_to_decimal(@epsilon_rate.join)
+  def multiply_rates(binary_array_1, binary_array_2)
+    binary_1_decimal = binary_to_decimal(binary_array_1.join)
+    binary_2_decimal = binary_to_decimal(binary_array_2.join)
 
-    gamma_decimal * epsilon_decimal
+    binary_1_decimal * binary_2_decimal
   end
 
   def read_input(filepath)
