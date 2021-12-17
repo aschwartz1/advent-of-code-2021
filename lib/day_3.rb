@@ -5,14 +5,12 @@ class Day3
   def initialize(filepath)
     @binaries = read_input(filepath)
     @binary_length = @binaries.first.length
-    @epsilon_rate = Array.new(@binary_length, 0)
-    @gamma_rate = Array.new(@binary_length, 0)
   end
 
   def part1
-    calculate_rates
+    rates = calculate_rates
 
-    multiply_rates(@gamma_rate, @epsilon_rate)
+    multiply_rates(rates[:gamma_rate], rates[:epsilon_rate])
   end
 
   def part2
@@ -47,10 +45,14 @@ class Day3
     positional_sums = add_binaries
     gamma_epsilon_threshold = @binaries.length / 2
 
+    rates = {gamma_rate: [], epsilon_rate: []}
+
     positional_sums.each_with_index do |total, i|
-      @gamma_rate[i] = total > gamma_epsilon_threshold ? 1 : 0
-      @epsilon_rate[i] = total < gamma_epsilon_threshold ? 1 : 0
+      rates[:gamma_rate][i] = total > gamma_epsilon_threshold ? 1 : 0
+      rates[:epsilon_rate][i] = total < gamma_epsilon_threshold ? 1 : 0
     end
+
+    rates
   end
 
   def multiply_rates(binary_array_1, binary_array_2)
